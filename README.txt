@@ -1,1 +1,1 @@
-First commit
+This is a chrome extension to block emotes on twitch. The bets part is that you can turn off the entire lines so your chat is no longer filed with nothing but emote spam. 
