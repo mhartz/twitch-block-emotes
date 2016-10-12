@@ -1,4 +1,9 @@
 /*
+*	TODO: When switching between toggleMessageWithAnyEmote and toggleMEssageWithOnlyEmote they cancel each other out.
+ */
+
+
+/*
 *	Toggle all emoticons on or off.
 */
 function toggleAllEmotes() {
@@ -41,14 +46,13 @@ function toggleMessageWithAnyEmote() {
 /*
 *	Toggle entire messages that only have emoticons on them
 *
-*	Todo: Currently hide user links as well, need to fix
 */
 function toggleMessageWithOnlyEmote() {
    if ($('#message-with-only-emote').prop('checked')) {
 	   $('.message-line').each(function() {
 	       var textMessage = $(this).find('.message').clone().children().remove().end().text().trim();
 
-	       if ((textMessage.length <= 0)) {
+	       if (textMessage.length <= 0 && $(this).find('.message').find('a').length <= 0) {
 	           $(this).hide();
 	       }
 	   });
@@ -72,12 +76,18 @@ function toggleMessageWithOnlyEmote() {
 *	
 *	ToDo: Loop through active emoticons and add them to the selection, display all items
 */
+function getEmotes() {
+	var emotes = jQuery.uniqueSort(('.emoticon').alt('attr').get());
+
+	console.log(emotes);
+}
+
 function toggleUsingEmoteName(emoticon) {
 	$('.emoticon[alt="' + emoticon + '"').each(function() {
 		$(this).hide();
 	});
 }
-toggleUsingEmoteName('qtpFEELS');
+
 
 
 /*
@@ -87,7 +97,7 @@ toggleUsingEmoteName('qtpFEELS');
 function toggleMessageWithEmoteCount(emoticon) {
 	
 }
-toggleMessageWithEmoteCount('qtpFEELS');
+
 
 
 
@@ -105,5 +115,9 @@ $(function() {
 	
 	$('#message-with-only-emote').change(function() {
 		toggleMessageWithOnlyEmote();
+	});
+
+	$('#hide-by-name-btn').click(function() {
+		toggleUsingEmoteName($(this).parent().find('#using-emote-name').val());
 	});
 });
