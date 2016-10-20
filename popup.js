@@ -94,6 +94,7 @@ function getEmotes() {
 	}
 	
 	// Todo: Move this is the init at bottom
+	// Todo: Also make it so that if the line only contains emotes, it should hide (would be nice to be it's own function to do this)
 	$('.emote-selector').change(function() {
 		if ($(this).prop('checked')) {
 			var selectorValue = $(this).val();
