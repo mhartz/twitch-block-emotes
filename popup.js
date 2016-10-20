@@ -74,12 +74,26 @@ function toggleMessageWithOnlyEmote() {
 *	Loops through each emoticon that shows and adds them to the selection
 *	so a user can pick and choose which to show/hide.
 *	
-*	ToDo: Loop through active emoticons and add them to the selection, display all items
+*	ToDo: Refactor using objects instead of arrays
 */
 function getEmotes() {
-	var emotes = jQuery.uniqueSort(('.emoticon').alt('attr').get());
-
-	console.log(emotes);
+	var emoteAltArray = [];
+	var emoteSrcArray = [];
+	var emoteSrcSetArray = [];
+	
+	$('.emoticon').each(function() {
+		emoteAltArray.push($(this).attr('alt'));
+		emoteSrcArray.push($(this).attr('src'));
+		emoteSrcSetArray.push($(this).attr('srcset'));
+	});
+	
+	emoteAltArray = jQuery.uniqueSort(emoteAltArray);
+	emoteSrcArray = jQuery.uniqueSort(emoteSrcArray);
+	emoteSrcSetArray = jQuery.uniqueSort(emoteSrcSetArray);
+	
+	for (var i = 0; i < emoteAltArray.length; i++) {
+		$('.emote-name-list').append('<li><span class="balloon-wrapper"><img class="emoticon-icon" src="' + emoteSrcArray[i] + '" srcset="' + emoteSrcSetArray[i] + '" alt="' + emoteAltArray[i] + '"><div class="balloon balloon--tooltip balloon--down balloon--center mg-t-1">' + emoteAltArray[i] + '</div></span><input type="checkbox" id="emote-' + emoteAltArray[i] + '" value="emote-' + emoteAltArray[i] + '"></li>');
+	}
 }
 
 function toggleUsingEmoteName(emoticon) {
@@ -120,4 +134,6 @@ $(function() {
 	$('#hide-by-name-btn').click(function() {
 		toggleUsingEmoteName($(this).parent().find('#using-emote-name').val());
 	});
+	
+	getEmotes();
 });
