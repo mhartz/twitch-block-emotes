@@ -41,8 +41,6 @@ function toggleMessageWithAnyEmote() {
 }
 
 
-
-
 /*
 *	Toggle entire messages that only have emoticons on them
 *
@@ -103,7 +101,6 @@ function toggleUsingEmoteName(emoticon) {
 }
 
 
-
 /*
 *	Toggle entire message lines that have any more than a specified amount
 *	of emoticons 
@@ -111,8 +108,6 @@ function toggleUsingEmoteName(emoticon) {
 function toggleMessageWithEmoteCount(emoticon) {
 	
 }
-
-
 
 
 /*
