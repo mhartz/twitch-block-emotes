@@ -90,8 +90,30 @@ function getEmotes() {
 	emoteSrcSetArray = jQuery.uniqueSort(emoteSrcSetArray);
 	
 	for (var i = 0; i < emoteAltArray.length; i++) {
-		$('.emote-name-list').append('<li><span class="balloon-wrapper"><img class="emoticon-icon" src="' + emoteSrcArray[i] + '" srcset="' + emoteSrcSetArray[i] + '" alt="' + emoteAltArray[i] + '"><div class="balloon balloon--tooltip balloon--down balloon--center mg-t-1">' + emoteAltArray[i] + '</div></span><input type="checkbox" id="emote-' + emoteAltArray[i] + '" value="emote-' + emoteAltArray[i] + '"></li>');
+		$('.emote-name-list').append('<li><span class="balloon-wrapper"><img class="emoticon-icon" src="' + emoteSrcArray[i] + '" srcset="' + emoteSrcSetArray[i] + '" alt="' + emoteAltArray[i] + '"><div class="balloon balloon--tooltip balloon--down balloon--center mg-t-1">' + emoteAltArray[i] + '</div></span><input type="checkbox" id="emote-' + emoteAltArray[i] + '" class="emote-selector" value="' + emoteAltArray[i] + '"></li>');
 	}
+	
+	// Todo: Move this is the init at bottom
+	$('.emote-selector').change(function() {
+		if ($(this).prop('checked')) {
+			var selectorValue = $(this).val();
+			
+			$('.emoticon').each(function() {
+				if ($(this).attr('alt') === selectorValue) {
+					$(this).hide();
+				}
+			});
+		}
+		else {
+			var selectorValue = $(this).val();
+			
+			$('.emoticon').each(function() {
+				if ($(this).attr('alt') === selectorValue) {
+					$(this).show();
+				}
+			});
+		}
+	});
 }
 
 function toggleUsingEmoteName(emoticon) {
