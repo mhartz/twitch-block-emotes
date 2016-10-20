@@ -128,8 +128,17 @@ function toggleUsingEmoteName(emoticon) {
 *	Toggle entire message lines that have any more than a specified amount
 *	of emoticons 
 */
-function toggleMessageWithEmoteCount(emoticon) {
+function toggleMessageWithEmoteCount() {
+	var getCount = $('#message-with-emote-count').val();
 	
+	$('.message-line').each(function() {
+		if($(this).find('.emoticon').length > getCount && getCount != null && getCount != '') {
+			$(this).find('.emoticon').hide();
+		}
+		else {
+			$(this).find('.emoticon').show();
+		}
+	});
 }
 
 
@@ -154,4 +163,8 @@ $(function() {
 	});
 	
 	getEmotes();
+	
+	$('#message-with-emote-count').change(function() {
+		toggleMessageWithEmoteCount();
+	});
 });
