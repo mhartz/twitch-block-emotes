@@ -2,14 +2,15 @@
 *	TODO: When switching between toggleMessageWithAnyEmote and toggleMEssageWithOnlyEmote they cancel each other out.
  */
 
-
 /*
 *	Toggle all emoticons on or off.
 */
 function toggleAllEmotes() {
-	if ($('#all-emotes').prop('checked')) {
-	    $('.emoticon').each(function() {
-	        $(this).hide();
+	var emoticons = document.querySelectorAll('.emoticon');
+
+	if (document.getElementById('all-emotes').checked) {
+		emoticons.forEach(function(el) {
+	        el.style.display = 'none';
 	    });
 	}
 	else {
@@ -24,10 +25,12 @@ function toggleAllEmotes() {
 *	Toggle entire message lines that have any emotes on them to show/hide
 */
 function toggleMessageWithAnyEmote() {
-	if ($('#message-with-any-emote').prop('checked')) {
-	    $('.message-line').each(function() {
-	        if ($(this).find('.emoticon').length != 0) {
-	            $(this).hide();
+	var messageLines = document.querySelectorAll('.message-line');
+
+	if (document.getElementById('message-with-any-emote').checked) {
+		messageLines.forEach(function(el) {
+	        if (el.querySelector('.emoticon') !== null) {
+				el.style.display = 'none';
 	        }
 	    });
 	}
@@ -46,12 +49,14 @@ function toggleMessageWithAnyEmote() {
 *
 */
 function toggleMessageWithOnlyEmote() {
-   if ($('#message-with-only-emote').prop('checked')) {
-	   $('.message-line').each(function() {
-	       var textMessage = $(this).find('.message').clone().children().remove().end().text().trim();
+	var messageLines = document.querySelectorAll('.message-line');
 
-	       if (textMessage.length <= 0 && $(this).find('.message').find('a').length <= 0) {
-	           $(this).hide();
+   if (document.getElementById('message-with-only-emote').checked) {
+	   messageLines.forEach(function(el) {
+	       var textMessage = el.querySelector('.message').clone().children().remove().end().text().trim();
+
+	       if (textMessage.length <= 0 && el.querySelector('.message').find('a').length <= 0) {
+			   el.style.display = 'none';
 	       }
 	   });
 	}
