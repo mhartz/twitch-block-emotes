@@ -14,8 +14,8 @@ function toggleAllEmotes() {
 	    });
 	}
 	else {
-		$('.emoticon').each(function() {
-	        $(this).show();
+		emoticons.forEach(function(el) {
+	        el.style.display = 'inline';
 	    });
 	}
 }
@@ -35,9 +35,9 @@ function toggleMessageWithAnyEmote() {
 	    });
 	}
 	else {
-		$('.message-line').each(function() {
-	        if ($(this).find('.emoticon').length != 0) {
-	            $(this).show();
+		messageLines.forEach(function(el) {
+			if (el.querySelector('.emoticon') !== null) {
+				el.style.display = 'inline';
 	        }
 	    });
 	}
